@@ -6,16 +6,8 @@ module.exports = {
     entry: "./apps/asksmartai/src/lander-entry.js",
     output: {
         filename: "lander.bundle.js",
-        path: path.resolve(__dirname, "apps/asksmartai/dist"),
-        clean: true,
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-            },
-        ],
+        path: path.resolve(__dirname, "apps/asksmartai/js"),
+        clean: false,
     },
     optimization: {
         minimize: true,
