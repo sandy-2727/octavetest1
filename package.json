@@ -2,7 +2,8 @@
     "name": "octavetest1",
     "private": true,
     "scripts": {
-        "build": "webpack --config webpack.config.js"
+        "build": "npm run include:html && webpack --config webpack.config.js",
+        "include:html": "node scripts/html-includes.js"
     },
     "devDependencies": {
         "webpack": "^5.97.1",
