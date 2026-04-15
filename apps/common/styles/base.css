@@ -1,0 +1,85 @@
+/**
+ * Shared baseline styles for all Octave mini-apps.
+ * Apps layer app-specific rules in their own style.css.
+ */
+
+:root {
+  --octave-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu,
+    Cantarell, "Noto Sans", sans-serif;
+  --octave-radius: 10px;
+  --octave-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --octave-border: 1px solid rgba(15, 23, 42, 0.08);
+  --octave-text: #0f172a;
+  --octave-muted: #64748b;
+  --octave-surface: #ffffff;
+  --octave-accent: #2563eb;
+  --octave-accent-hover: #1d4ed8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--octave-font-sans);
+  color: var(--octave-text);
+  line-height: 1.5;
+  background: linear-gradient(160deg, #f8fafc 0%, #eef2ff 100%);
+  min-height: 100vh;
+}
+
+.octave-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.octave-card {
+  background: var(--octave-surface);
+  border: var(--octave-border);
+  border-radius: var(--octave-radius);
+  box-shadow: var(--octave-shadow);
+  padding: 1.25rem 1.5rem;
+}
+
+.octave-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1rem;
+  font: inherit;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--octave-accent);
+  color: #fff;
+  transition: background 0.15s ease, transform 0.08s ease;
+}
+
+.octave-btn:hover {
+  background: var(--octave-accent-hover);
+}
+
+.octave-btn:active {
+  transform: translateY(1px);
+}
+
+.octave-btn--ghost {
+  background: transparent;
+  color: var(--octave-accent);
+  border: 1px solid rgba(37, 99, 235, 0.35);
+}
+
+.octave-btn--ghost:hover {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.octave-muted {
+  color: var(--octave-muted);
+  font-size: 0.9rem;
+}

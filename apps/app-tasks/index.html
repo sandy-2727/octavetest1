@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Tasks — Octave</title>
+    <link rel="stylesheet" href="../common/styles/base.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="octave-shell">
+      <header class="app-header">
+        <h1>Tasks</h1>
+        <p class="octave-muted">
+          Toggle items to emit <code>task_toggle</code> events via the shared tracker.
+        </p>
+      </header>
+
+      <section class="octave-card task-panel">
+        <ul id="task-list" class="task-list" aria-label="Task list"></ul>
+        <div class="task-panel__footer">
+          <button type="button" id="btn-add-sample" class="octave-btn">
+            Add sample task
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>

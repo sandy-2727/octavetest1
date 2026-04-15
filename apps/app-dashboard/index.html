@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Dashboard — Octave</title>
+    <link rel="stylesheet" href="../common/styles/base.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="octave-shell">
+      <header class="app-header">
+        <h1>Dashboard</h1>
+        <p class="octave-muted">
+          Sample app using shared tracking and a local metric component.
+        </p>
+      </header>
+
+      <section id="metrics" class="metrics-grid" aria-label="Key metrics"></section>
+
+      <section class="actions">
+        <button type="button" id="btn-refresh" class="octave-btn">
+          Simulate refresh
+        </button>
+        <button type="button" id="btn-export" class="octave-btn octave-btn--ghost">
+          Log history
+        </button>
+      </section>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
