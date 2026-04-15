@@ -1,0 +1,9 @@
+{
+  "components": {
+    "header": "apps/asksmartai/components/header.html",
+    "footer": "apps/asksmartai/components/footer.html"
+  },
+  "pages": [
+    "apps/asksmartai/index.html"
+  ]
+}
