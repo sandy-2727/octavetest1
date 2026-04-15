@@ -1,0 +1,747 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Experience the power of AI conversation with our advanced chat assistant">
+<meta name="theme-color" content="#4169E1">
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<meta name="referrer" content="no-referrer" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WZNX23RL');</script>
+<!-- End Google Tag Manager -->
+ 
+<!-- Paste this right before your closing head tag -->
+<script type="text/javascript">
+    (function (f, b) { if (!b.__SV) { var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) { function g(a, d) { var b = d.split("."); 2 == b.length && ((a = a[b[0]]), (d = b[1])); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))); }; } var a = b; "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel"); a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d; }; a.people.toString = function () { return a.toString(1) + ".people (stub)"; }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split( " "); for (h = 0; h < i.length; h++) g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]); }; } for ( var d = {}, e = ["get_group"].concat( Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]); return d; }; b._i.push([e, f, c]); }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g); } })(document, window.mixpanel || []);
+ 
+    // Create an instance of the Mixpanel object
+    mixpanel.init("cab08272d58b882d951fb17c81933fee");
+    mixpanel.track_pageview({
+        "current_url": window.location.href,
+        "domain": window.location.hostname,
+    });
+</script>
+<title>Chat Smarter</title>
+<!--  hot jar code-->
+<script> (function (c, s, q, u, a, r, e) { c.hj=c.hj||function(){(c.hj.q=c.hj.q||[]).push(arguments)}; c._hjSettings = { hjid: a }; r = s.getElementsByTagName('head')[0]; e = s.createElement('script'); e.async = true; e.src = q + c._hjSettings.hjid + u; r.appendChild(e); })(window, document, 'https://static.hj.contentsquare.net/c/csq-', '.js', 6661704); </script>
+<!--  end of hot jar code-->
+<link rel="icon" href="./images/logo.png">
+<link rel="stylesheet" href="../common/styles/base.css">
+<link rel="stylesheet" href="./tailwind.min.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+<link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" media="print" onload="this.media='all'">
+<!-- Marked.js for markdown rendering -->
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', system-ui, -apple-system, sans-serif;
+background-color: #f5f7ff;
+scroll-behavior: smooth;
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+/*content-visibility: auto;*/
+contain-intrinsic-size: 1px 5000px;
+}
+#chatInterface {
+aspect-ratio: 4/3;
+}
+@media (max-width: 1024px) {
+#chatInterface {
+aspect-ratio: 4/5;
+}
+}
+.chat-modal {
+height: 100vh;
+height: 100dvh;
+}
+.chat-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100vh;
+background: white;
+z-index: 9999;
+display: none;
+}
+.chat-modal.active {
+display: block;
+}
+@media (min-width: 1024px) {
+.chat-modal {
+display: none !important;
+}
+}
+@media (max-width: 640px) {
+h1 { font-size: 2.5rem; line-height: 1.2; }
+.container { padding-left: 1rem; padding-right: 1rem; }
+}
+@media (min-width: 641px) and (max-width: 1024px) {
+.container { max-width: 90%; }
+}
+@media (max-width: 768px) {
+.container {
+padding-left: 1rem;
+padding-right: 1rem;
+margin: 0 auto;
+}
+.chat-container {
+width: 100%;
+max-width: 100%;
+}
+section { padding: 3rem 0; }
+.grid { gap: 1.5rem; }
+}
+[loading="lazy"] {
+content-visibility: auto;
+}
+.chat-container {
+overflow-y: auto;
+scrollbar-width: thin;
+scrollbar-color: #CBD5E1 transparent;
+width: 100%;
+margin: 0 auto;
+}
+.chat-container::-webkit-scrollbar {
+width: 6px;
+}
+.chat-container::-webkit-scrollbar-track {
+background: transparent;
+}
+.chat-container::-webkit-scrollbar-thumb {
+background-color: #CBD5E1;
+border-radius: 20px;
+}
+.typing-animation {
+display: inline-flex;
+align-items: center;
+column-gap: 4px;
+}
+.typing-dot {
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background-color: #6B7280;
+animation: typing 1.5s infinite ease-in-out;
+}
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.3s; }
+.typing-dot:nth-child(3) { animation-delay: 0.6s; }
+@keyframes typing {
+0%, 100% { opacity: 0.3; transform: scale(0.8); }
+50% { opacity: 1; transform: scale(1); }
+}
+input:focus {
+outline: none;
+}
+.nav-shadow {
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+@media (max-width: 900px) {
+    .headerContainer{
+        max-width: 100% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logoico {
+        width: 40px;
+        height: 40px;
+    }
+    .logoname {
+        width: 150px;
+    }
+}
+
+/* Markdown styling for chat messages */
+.streaming-content h1,
+.streaming-content h2,
+.streaming-content h3,
+.streaming-content h4,
+.streaming-content h5,
+.streaming-content h6,
+.text-gray-700 h1,
+.text-gray-700 h2,
+.text-gray-700 h3,
+.text-gray-700 h4,
+.text-gray-700 h5,
+.text-gray-700 h6 {
+    margin: 0.5em 0;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.streaming-content h1,
+.text-gray-700 h1 { font-size: 1.5em; }
+.streaming-content h2,
+.text-gray-700 h2 { font-size: 1.3em; }
+.streaming-content h3,
+.text-gray-700 h3 { font-size: 1.2em; }
+.streaming-content h4,
+.text-gray-700 h4 { font-size: 1.1em; }
+.streaming-content h5,
+.text-gray-700 h5 { font-size: 1em; }
+.streaming-content h6,
+.text-gray-700 h6 { font-size: 0.9em; }
+
+.streaming-content p,
+.text-gray-700 p {
+    margin: 0.5em 0;
+    line-height: 1.5;
+}
+
+.streaming-content ul,
+.streaming-content ol,
+.text-gray-700 ul,
+.text-gray-700 ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.streaming-content li,
+.text-gray-700 li {
+    margin: 0.25em 0;
+    line-height: 1.4;
+}
+
+.streaming-content code,
+.text-gray-700 code {
+    background-color: #f1f5f9;
+    padding: 0.2em 0.4em;
+    border-radius: 0.25em;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.streaming-content pre,
+.text-gray-700 pre {
+    background-color: #f8fafc;
+    padding: 1em;
+    border-radius: 0.5em;
+    overflow-x: auto;
+    margin: 0.5em 0;
+    border: 1px solid #e2e8f0;
+}
+
+.streaming-content pre code,
+.text-gray-700 pre code {
+    background: none;
+    padding: 0;
+}
+
+.streaming-content blockquote,
+.text-gray-700 blockquote {
+    border-left: 4px solid #e2e8f0;
+    padding-left: 1em;
+    margin: 0.5em 0;
+    color: #64748b;
+    font-style: italic;
+}
+
+.streaming-content strong,
+.text-gray-700 strong {
+    font-weight: 600;
+}
+
+.streaming-content em,
+.text-gray-700 em {
+    font-style: italic;
+}
+
+.streaming-content a,
+.text-gray-700 a {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.streaming-content a:hover,
+.text-gray-700 a:hover {
+    color: #1d4ed8;
+}
+
+.streaming-content hr,
+.text-gray-700 hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 1em 0;
+}
+
+
+.getAppWrap {
+    margin: 64px auto;
+    border-radius: 24px;
+background: #0E3164;
+display: flex;
+max-width: 1024px;
+height: 549.813px;
+padding: 40px;
+width: 100%;
+}
+.getapp {
+    width: 100%;
+}
+.getAppWrap h2 {
+    color: #FFF;
+text-align: center;
+font-family: Roboto;
+font-size: 36px;
+font-style: normal;
+font-weight: 700;
+line-height: 40px; /* 111.111% */
+}
+.lapImg {
+    padding: 32px;
+    text-align: center;
+}
+.lapImg img {
+    margin: 0 auto;
+}
+.downloadBtn {
+    display: flex;
+width: 155.141px;
+height: 48px;
+padding: 12px 24px;
+justify-content: center;
+align-items: center;
+border-radius: 8px;
+background: #FFF;
+box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.10), 0 10px 15px -3px rgba(0, 0, 0, 0.10);
+color: #2563EB;
+text-align: center;
+text-shadow: 0 4px 6px rgba(0, 0, 0, 0.10), 0 10px 15px rgba(0, 0, 0, 0.10);
+font-family: Roboto;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 48px; /* 150% */
+margin: 0 auto;
+}
+.disclamerSec {
+    color: #DBEAFE;
+text-align: center;
+font-family: Roboto;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 19.5px; /* 162.5% */
+max-width: 767px;
+padding-top: 16px;
+margin: 0 auto;
+}
+.disclamerSec a {
+    color: #fff;
+    text-decoration: underline;
+}
+.disclamerSec a:hover {
+    text-decoration: none;
+}
+@media (max-width: 1023px) {
+.getAppWrap {
+    height: auto;
+}
+}
+</style>
+</head>
+<body>
+<!-- Navigation -->
+<header id="navbar" class="sticky top-0 left-0 w-full bg-white z-50 transition-all duration-300 backdrop-blur-sm bg-white/90">
+<div class="container mx-auto px-4 py-5 flex justify-between items-center headerContainer">
+<span href="#" class="flex items-center gap-2">
+<img src="./images/logo.png" alt="AI Chat Logo" class="logoico w-14 h-14 object-contain">
+<img src="./images/logoname.png" alt="AI Chat Text Logo" class="logoname object-contain" width="214px">
+</span>
+<nav class="hidden md:flex space-x-8">
+<a href="#hero" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+<a href="#chatInterface" class="text-gray-600 hover:text-primary transition-colors">Ask AI</a>
+<a href="#get-more-done" class="text-gray-600 hover:text-primary transition-colors">Use Cases</a>
+<a href="#how-it-works" class="text-gray-600 hover:text-primary transition-colors">How to Use</a>
+<a href="#faq" class="text-gray-600 hover:text-primary transition-colors">FAQs</a>
+</nav>
+<div class="md:hidden relative">
+<button id="mobileMenuBtn" class="w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+<nav id="mobileMenu" class="hidden absolute top-full right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2">
+<a href="#hero" class="block px-4 py-2 text-gray-600 hover:bg-gray-50">Home</a>
+<a href="#chatInterface" class="block px-4 py-2 text-gray-600 hover:bg-gray-50">Ask AI</a>
+<a href="#get-more-done" class="block px-4 py-2 text-gray-600 hover:bg-gray-50">Use Cases</a>
+<a href="#how-it-works" class="block px-4 py-2 text-gray-600 hover:bg-gray-50">How to Use</a>
+<a href="#faq" class="block px-4 py-2 text-gray-600 hover:bg-gray-50">FAQs</a>
+</nav>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section id="hero" class="pt-20 pb-12 min-h-[85vh] flex items-center bg-[#f5f7ff] will-change-transform">
+<div class="container mx-auto px-4">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+<!-- Left Content -->
+<div class="lg:w-1/2">
+<h1 class="text-5xl md:text-6xl font-bold text-gray-900">
+Experience the<br>
+Power of <span class="text-[#2563EB]">AI</span><br>
+<span class="text-[#2563EB]">Conversation!</span>
+</h1>
+<p class="text-gray-600 mt-8 text-xl max-w-xl leading-relaxed">
+<!-- Get quick answers, solve problems, and spark new ideas with our smart AI assistant. -->
+ Chat Smarter with aiBrowser - get quick answers, solve problems, and spark new ideas with our AI assistant. 
+</p>
+<button class="downloadBtn download-ai playstore-btn"  btn-text="Download Now" btn-position="atf" style="margin: 20px 0 0;">Download Now</button>
+</div>
+<!-- Right Content - Chat Interface -->
+<div class="lg:w-1/2 w-full max-w-[640px] mx-auto lg:mx-0 relative chat-interface">
+<div class="bg-white rounded-2xl shadow-xl overflow-hidden" id="chatInterface">
+<!-- Chat Header -->
+<div class="px-6 py-3 border-b border-gray-100 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img src="./images/2874f576ed30e2be9e8d552284e9c495.png" alt="AI Assistant" class="w-full h-full object-cover">
+</div>
+<div>
+<h3 class="text-sm font-medium text-gray-900">AI Assistant</h3>
+<p class="text-[10px] text-green-500">Online</p>
+</div>
+</div>
+<button id="resetChat" class="w-6 h-6 flex items-center justify-center text-gray-400 hover:text-gray-600">
+<i class="ri-refresh-line"></i>
+</button>
+</div>
+<!-- Chat Messages -->
+<div id="chatContainer" class="chat-container p-6 bg-gray-50 text-gray-700" style="height: calc(100% - 140px); min-height: unset; max-height: unset;">
+<!-- AI Message -->
+<div class="flex gap-3 mb-4">
+<div class="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+<img src="./images/2874f576ed30e2be9e8d552284e9c495.png" alt="AI Assistant" class="w-full h-full object-cover">
+</div>
+<div class="bg-white p-3 rounded-lg rounded-tl-none shadow-sm max-w-[80%]">
+<p class="text-gray-700">Hello! I'm your AI assistant. How can I help you today?</p>
+</div>
+</div>
+<!-- Messages will be added here dynamically -->
+</div>
+<!-- Chat Input -->
+<div class="p-4 border-t border-gray-100">
+<form id="chatForm" class="flex items-center gap-2">
+<input
+type="text"
+id="messageInput"
+class="flex-1 p-3 bg-gray-50 rounded-lg border-none text-gray-700 placeholder-gray-400"
+placeholder="Type your message here..."
+autocomplete="off"
+>
+<button type="submit" class="send-button w-10 h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center !rounded-button whitespace-nowrap">
+<i class="ri-send-plane-fill"></i>
+</button>
+<button class="stop-button w-10 h-10 bg-[#2563EB] text-white rounded-full hidden items-center justify-center !rounded-button whitespace-nowrap">
+    <i class="ri-stop-circle-fill"></i>
+</button>
+</form>
+</div>
+</div>
+<div class="bg-[#f5f7ff] py-3 px-4 mt-4 rounded-xl">
+<p class="text-sm text-gray-500 text-center">This tool provides AI-generated answers</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section id="get-more-done" class="py-24 bg-gradient-to-b from-white to-blue-50">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-center text-gray-900 mb-4">Smart Help for Everyday Tasks</h2>
+<p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">Powerful AI assistance to help you accomplish more in less time</p>
+<div class="max-w-5xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm text-center">
+<div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 mx-auto">
+<i class="ri-edit-line text-primary ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Write or Edit Text</h3>
+<p class="text-gray-600 leading-relaxed">Get help drafting emails or fixing grammar</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm text-center">
+<div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 mx-auto">
+<i class="ri-calendar-line text-primary ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Plan Your Day</h3>
+<p class="text-gray-600 leading-relaxed">Ask for reminders, to-do lists, or time tips</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm text-center">
+<div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 mx-auto">
+<i class="ri-question-line text-primary ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Answer Quick Questions</h3>
+<p class="text-gray-600 leading-relaxed">Get instant, reliable facts and definitions</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm text-center">
+<div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 mx-auto">
+<i class="ri-chat-3-line text-primary ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Chat for Ideas or Advice</h3>
+<p class="text-gray-600 leading-relaxed">Brainstorm topics, meals, or travel plans</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-white p-8 rounded-2xl shadow-sm text-center">
+<div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 mx-auto">
+<i class="ri-file-text-line text-primary ri-2x"></i>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-3">Summarize Info</h3>
+<p class="text-gray-600 leading-relaxed">Paste long text for a quick summary</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works Section -->
+<section id="how-it-works" class="py-24 bg-gradient-to-b from-white to-blue-50">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold text-center text-gray-900 mb-4">How to Use the Chatbot</h2>
+<div class="mt-16">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Step 1 -->
+<div class="bg-white p-6 rounded-xl shadow-sm text-center">
+<div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+<span class="text-primary font-bold">1</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Type Your Question</h3>
+<p class="text-gray-600">Enter anything you'd like help with — a task, question, or idea.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-white p-6 rounded-xl shadow-sm text-center">
+<div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+<span class="text-primary font-bold">2</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Hit the Send Button</h3>
+<p class="text-gray-600">Click the arrow or press enter to submit your message to the chat assistant</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-white p-6 rounded-xl shadow-sm text-center">
+<div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+<span class="text-primary font-bold">3</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Get an Instant Reply</h3>
+<p class="text-gray-600">The chatbot quickly responds with helpful, relevant information.</p>
+</div>
+<!-- Step 4 -->
+<div class="bg-white p-6 rounded-xl shadow-sm text-center">
+<div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4 mx-auto">
+<span class="text-primary font-bold">4</span>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mb-2">Continue Chatting</h3>
+<p class="text-gray-600">Ask follow-up questions or try new tasks — it's always ready to help.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Get  App Section start -->
+<section class="getAppWrap">
+    <div class="getapp">
+        <h2>
+            Chat Smarter with aiBrowser - Get the App Today
+        </h2>
+        <div class="lapImg">
+            <img src="./images/lapImg.png" alt="AI Assistant" class="">  
+        </div>
+        <button class="downloadBtn download-ai playstore-btn"  btn-text="Download Now" btn-position="btf">Download Now</button>
+        <p class="disclamerSec">
+            By clicking the button above, you agree to download aiBrowser from aibrowserapps.com, which includes AI Chat and other productivity tools and you accept our <a href="legal/terms-of-service" target="_blank">Terms of Service</a> and <a href="legal/privacy-policy" target="_blank">Privacy Policy</a>.
+        </p>
+    </div>
+</section>
+<!-- Get  App Section end -->
+
+
+
+<!-- FAQ Section -->
+<section id="faq" class="py-16 bg-white">
+<div class="container mx-auto px-4">
+<h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Frequently Asked Questions</h2>
+<div class="max-w-3xl mx-auto space-y-4">
+    <!-- FAQ Item 0 -->
+<div class="border border-gray-200 rounded-xl overflow-hidden">
+<button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+<span class="text-lg font-semibold text-gray-900">Is this an AI Chat App?</span>
+<i class="ri-add-line text-gray-400"></i>
+</button>
+<div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+<p class="text-gray-600">This is an AI Chat widget which is one of the many features built into aiBrowser. When you download it, you get the full browser along with other productivity tools designed to make your browsing smarter, faster, and more efficient.</p>
+</div>
+</div>
+
+<!-- FAQ Item 1 -->
+<div class="border border-gray-200 rounded-xl overflow-hidden">
+<button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+<span class="text-lg font-semibold text-gray-900">What is Chat Smarter?</span>
+<i class="ri-add-line text-gray-400"></i>
+</button>
+<div class="hidden px-6 py-4 border-t border-gray-200 bg-gray-50">
+<p class="text-gray-600">It's a smart tool that answers questions and helps with tasks using artificial intelligence.</p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="border border-gray-200 rounded-xl overflow-hidden">
+<button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+<span class="text-lg font-semibold text-gray-900">How do I use Chat Smarter?</span>
+<i class="ri-add-line text-gray-400"></i>
+</button>
+<div class="hidden px-6 py-4 border-t border-gray-200 bg-gray-50">
+<p class="text-gray-600">Simply type your question, and it will respond instantly.</p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="border border-gray-200 rounded-xl overflow-hidden">
+<button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+<span class="text-lg font-semibold text-gray-900">Can Chat Smarter help with difficult problems?</span>
+<i class="ri-add-line text-gray-400"></i>
+</button>
+<div class="hidden px-6 py-4 border-t border-gray-200 bg-gray-50">
+<p class="text-gray-600">Yes, it can help with many problems but complex issues may need expert advice.</p>
+</div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="border border-gray-200 rounded-xl overflow-hidden">
+<button class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors" onclick="toggleFAQ(this)">
+<span class="text-lg font-semibold text-gray-900">How fast does Chat Smarter respond?</span>
+<i class="ri-add-line text-gray-400"></i>
+</button>
+<div class="hidden px-6 py-4 border-t border-gray-200 bg-gray-50">
+<p class="text-gray-600">The chatbot usually responds within seconds to your queries.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-12">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+<!-- Company Info -->
+<div class="flex-1 flex flex-col items-center md:items-start">
+<h3 class="text-xl font-bold mb-4">Chat Smarter</h3>
+<p class="text-gray-400">A smart AI assistant designed to help you learn, write, and chat better—instantly.</p>
+</div>
+<!-- Legal -->
+<div class="flex-1 flex flex-col items-center md:items-center">
+<div>
+<!-- <h3 class="text-xl font-bold mb-4">Legal</h3> -->
+<ul class="space-y-2">
+<li><a href="/legal/terms-of-service/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+<li><a href="/legal/privacy-policy/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+<li>
+    <a href="/legal/do-not-share-my-personal-information/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Do Not Share My Personal Information</a>
+</li>
+<li>
+    <a href="/legal/uninstall-instructions/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Uninstall Instructions</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Contact -->
+<div class="flex-1 flex flex-col items-center md:items-end">
+<div>
+<!-- <h3 class="text-xl font-bold mb-4">Contact</h3> -->
+<ul class="space-y-2">
+<li class="flex items-center justify-center md:justify-start gap-2">
+<i class="ri-mail-line text-gray-400"></i>
+<a href="mailto:contact@aibrowser.com" class="text-gray-400 hover:text-white transition-colors">contact@aibrowser.com</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Chat Modal -->
+<div class="chat-modal">
+<div class="h-full flex flex-col">
+<!-- Modal Header -->
+<div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between bg-white">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden">
+<img src="./images/2874f576ed30e2be9e8d552284e9c495.png" alt="AI Assistant" class="w-full h-full object-cover">
+</div>
+<div>
+<h3 class="text-sm font-medium text-gray-900">AI Assistant</h3>
+<p class="text-[10px] text-green-500">Online</p>
+</div>
+</div>
+<button class="close-modal-btn w-8 h-8 flex items-center justify-center">
+<i class="ri-close-line text-gray-400 text-xl"></i>
+</button>
+</div>
+<!-- Modal Chat Container -->
+<div id="modalChatContainer" class="flex-1 overflow-y-auto p-6 bg-gray-50 text-gray-700"></div>
+<!-- Modal Input -->
+<div class="sticky bottom-0 p-4 border-t border-gray-100 bg-white">
+<form id="modalChatForm" class="flex items-center gap-2">
+<input
+type="text"
+id="modalMessageInput"
+class="flex-1 p-3 bg-gray-50 rounded-lg border-none text-gray-700 placeholder-gray-400"
+placeholder="Type your message here..."
+autocomplete="off"
+>
+<button type="submit" class="send-button w-10 h-10 bg-[#2563EB] text-white rounded-full flex items-center justify-center !rounded-button whitespace-nowrap">
+<i class="ri-send-plane-fill"></i>
+</button>
+<button class="stop-button w-10 h-10 bg-[#2563EB] text-white rounded-full hidden items-center justify-center !rounded-button whitespace-nowrap">
+    <i class="ri-stop-circle-fill"></i>
+</button>
+</form>
+</div>
+</div>
+</div>
+</footer>
+<script>
+// Initialize marked library when it loads
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof marked !== 'undefined') {
+    marked.setOptions({
+      breaks: true,
+      gfm: true
+    });
+  }
+});
+</script>
+
+
+<script type="module" src="../common/tracking/lander-init.js"></script>
+<script>
+// Make toggleFAQ function globally available
+window.toggleFAQ = function(button) {
+  "use strict";
+  const content = button.nextElementSibling;
+  const icon = button.querySelector("i");
+  if (content.classList.contains("hidden")) {
+    content.classList.remove("hidden");
+    icon.classList.replace("ri-add-line", "ri-subtract-line");
+  } else {
+    content.classList.add("hidden");
+    icon.classList.replace("ri-subtract-line", "ri-add-line");
+  }
+};
+</script>
+</body>
+</html>
