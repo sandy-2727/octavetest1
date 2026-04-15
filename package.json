@@ -1,0 +1,13 @@
+{
+    "name": "octavetest1",
+    "private": true,
+    "scripts": {
+        "build": "webpack --config webpack.config.js"
+    },
+    "devDependencies": {
+        "css-loader": "^7.1.2",
+        "style-loader": "^4.0.0",
+        "webpack": "^5.97.1",
+        "webpack-cli": "^6.0.1"
+    }
+}
