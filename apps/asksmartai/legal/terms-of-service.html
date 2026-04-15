@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <meta name="referrer" content="no-referrer" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Inter", sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+                header {
+            --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+            background: #fff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        .headeIn {
+            height: 104px;
+            max-width: 1536px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
+        .headeIn a {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            height: 56px;
+        }
+
+        .containerPp {
+            max-width: 1100px;
+            margin: 120px auto 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-left: 4px solid #2563eb;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1em;
+        }
+
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .last-updated {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ecf0f1;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .contact-info {
+            /* background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 30px;
+            text-align: center; */
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 5px;
+        }
+
+        .email-link {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+         footer {
+            background: #111827;
+            padding: 48px 16px;
+            
+        }
+        footer .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+         }
+         .footTop {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+         }
+         .footIn {
+            /* width: 100%; */
+            max-width: 480px;
+           /*  height: 100px; */
+         } 
+         .footIn h3 {
+            font-size: 16px;
+            color: #fff;
+            padding-bottom: 16px;
+            margin: 0;
+            font-weight: 600;
+         }
+         .footIn ul {
+            margin: 0;
+            padding-left: 0;
+            list-style: none;
+         }
+          .footIn ul li {
+            line-height: 20px;
+            margin-bottom: 7px;
+          }
+         .footIn p {
+            --tw-text-opacity: 1;
+            color: #9ca3af;
+            padding-left: 1px;
+            padding-right: 1px;
+            text-align: left;
+            font-size: 14px;
+            max-width: 384px;
+            margin-bottom: 0;
+            line-height: 20px;
+         }
+         .footIn a {
+            color:#9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: normal;
+         }
+          .footIn a:hover {
+            text-decoration: none;
+            color: #fff;
+          }
+          .fDisclaimer {
+            margin-top: 24px;
+            padding-top: 24px;
+            margin-bottom: 0;
+             --tw-text-opacity: 1;
+            color: rgb(255 255 255 / 0.6);
+            text-align: center;
+            border-top: 1px solid rgb(255 255 255 / 0.1);
+            font-size: 12px;
+            line-height: 16px;
+          }
+           .justC {
+            justify-content: center;
+            display: flex;
+            }
+            .justR {
+            justify-content: right;
+            display: flex;
+            }
+            .mailbox{
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+            .mailbox:hover svg{
+                fill: #fff;
+            }
+            @media (max-width: 1535px) {
+            .footIn {
+                max-width: 394px;
+                height: auto;
+            }
+            }
+            @media (max-width: 1279px) {
+            .footIn {
+                max-width: 304px;
+            }
+            }
+            @media (max-width: 1023px) {
+            .footIn {
+                max-width: 219px;
+            }
+            }
+            /*  */
+            
+
+            @media (max-width: 1140px) {
+                    .containerPp {
+                        margin: 120px 20px 20px;
+                    }
+            }
+            @media (max-width: 800px) {
+                .footTop{
+                    flex-direction: column;
+                }
+                .footIn{
+                    max-width: 100%;
+                    justify-content: flex-start;
+                }
+                .justC {
+            display: block;
+            }
+            .justR {
+            display: block;
+            }
+            .footIn {
+                text-align: center;
+                height: auto;
+                max-width: 100%;
+            }
+            .footIn p {
+                max-width: 384px;
+                text-align: center;
+                margin: 0 auto;
+            }
+            .justC li{
+              text-align: center;
+            }
+            .mailbox{
+                justify-content: center;
+            }
+             }
+             @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+            .justC {
+            display: block;
+            }
+            .justR {
+            display: block;
+            }
+            .footIn {
+                text-align: center;
+                height: auto;
+                max-width: 100%;
+            }
+            .footIn p {
+                max-width: 384px;
+                text-align: center;
+                margin: 0 auto;
+            }
+            .justC li{
+              text-align: center;
+            }
+        }
+         @media (max-width: 352px) {
+            .logoF {
+                width: 17% !important;
+            }
+         }
+         .headeIn a {
+            cursor: default;
+         }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="headeIn">
+        <a class="flex items-center gap-2 cursor-auto">
+            <img src="../images/logo.png" alt="AI Package Tracker Logo" width="56px" class="logoF">
+            <img src="../images/logoname.png" alt="AI Package Tracker" width="214px" class="logoW">
+        </a>
+    </div>
+</header>
+
+   <div class="containerPp">
+       
+            <h1>Terms of Service</h1>
+
+     
+
+        <div class="section" id="section1">
+            <h2>1. Acceptance of Terms</h2>
+            <p>These Terms of Service ("ToS" or "Terms") and the Privacy Policy (collectively referred to as the "Agreement") govern the users' ("you," "your," or "users") access to and use of the services of the Entity <img src="../images/bb.png" width="228px" height="21px" style="vertical-align: middle;"> ("Entity") and its associated websites ("Websites")("collectively referred to as "Services", "we," "us," or "our"). By accessing or using the Services you acknowledge that you have read, understood, and agree to be bound by this Agreement. If you do not agree with any part of this Agreement, you must discontinue use immediately.</p>
+        </div>
+
+        <div class="section" id="section2">
+            <h2>2. Overview of Services</h2>
+            <p>We offer various browser and mobile applications designed to enhance user productivity and utility. These applications may include customizable features and integrated task management tools.</p>
+        </div>
+
+        <div class="section" id="section3">
+            <h2>3. User Obligations</h2>
+            <p>By utilizing the Services, you confirm that:</p>
+            <ul>
+                <li>You are at least 18 years old or have parental consent if you are between 16 and 18 years old.</li>
+                <li>You will comply with all applicable laws and regulations while using the Services.</li>
+                <li>You will refrain from engaging in any prohibited activities as outlined in Section 4 below.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="section4">
+            <h2>4. Prohibited Activities</h2>
+            <p>You may not engage in or attempt any of the following actions while using the Services:</p>
+            <ul>
+                <li>Use the Services for any unlawful, fraudulent, illegal, unethical, or immoral purposes, or commercial purposes without our prior consent.</li>
+                <li>Create content that imitates the appearance or functionality of the Services.</li>
+                <li>Engage in actions that could harm the Services or other users.</li>
+                <li>Remove any content from the Services, including proprietary notices.</li>
+                <li>Misrepresent your identity or falsely claim affiliation with another individual or entity while using the Services.</li>
+                <li>Interfere with other users' access to the Services or damage the underlying infrastructure.</li>
+                <li>Distribute harmful technologies such as malware, trojans, bugs, or other malicious software through the Services.</li>
+                <li>Access the Services without authorization using automated means such as bots or crawlers.</li>
+                <li>Infringe upon intellectual property rights of the Services or those of third parties.</li>
+                <li>Violate any terms outlined in this Agreement.</li>
+            </ul>
+            <p>Engaging in any of these activities may result in suspension or termination of your access to the Services.</p>
+        </div>
+
+        <div class="section" id="section5">
+            <h2>5. Feedback and Contributions</h2>
+            <p>We appreciate your feedback and encourage you to share your ideas. If you provide us with suggestions, concepts, designs, advertisements, photographs, images, data, or other inputs including ideas for new products or enhancements please be aware that such submissions are considered non-proprietary and non-confidential unless otherwise agreed upon in writing.</p>
+            <p>By submitting content to us through the Websites, you acknowledge that it becomes our property. We are not obligated to compensate you for your submissions and may use your ideas for any purpose in any medium indefinitely.</p>
+        </div>
+
+        <div class="section" id="section6">
+            <h2>6. Termination of Access</h2>
+            <p>We reserve the right to suspend or terminate your access to the Services if you violate any terms of this Agreement. We may impose such penalties at our discretion without prior notice. Additionally, we reserve the right to modify, suspend, or terminate the Services at any time without liability to you.</p>
+        </div>
+
+        <div class="section" id="section7">
+            <h2>7. Third-Party Providers</h2>
+            <p>Our Services utilize third-party services, such as analytics tools, to enhance functionality and improve user experience. While we strive to work with reputable providers, we make no guarantees regarding the accuracy, reliability, or completeness of the information obtained through these third-party sources. We are not liable for any damages or losses resulting from reliance on such third-party services.</p>
+        </div>
+
+        <div class="section" id="section8">
+            <h2>8. Warranty Disclaimer</h2>
+            <p>You understand and acknowledge that the Website and all associated features are provided on an "as is" and "as available" basis. We make no representations or warranties regarding the accuracy, completeness, fitness for a particular purpose, merchantability, or non-infringement of third-party intellectual property rights under applicable laws.</p>
+            <p>We further do not guarantee that our products and services will be provided accurately, uninterruptedly, timely, error-free, reliably, or securely. We do not warrant that any errors will be corrected or that the products and services will be free from harmful components such as viruses or malware. Any reliance on information obtained through our products and services is at your own risk.</p>
+        </div>
+
+        <div class="section" id="section9">
+            <h2>9. Limitation on Liability</h2>
+            <p>To the fullest extent permitted by law, we shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Services. This includes loss of profits, goodwill, data loss, or costs incurred in obtaining substitute services.</p>
+        </div>
+
+        <div class="section" id="section10">
+            <h2>10. Class Action Waiver</h2>
+            <p>By using the Services, you waive your right to participate in any class action lawsuits against us. Any legal disputes related to our products and services or this Agreement must be pursued solely in your individual capacity and not as part of a class action unless required by applicable law.</p>
+        </div>
+
+        <div class="section" id="section11">
+            <h2>11. Intellectual Property Rights</h2>
+            <p>All intellectual property rights associated with our Services including but not limited to content, text, images, audio elements, and designs are owned by us or licensed to us and are protected by copyright and trademark laws.</p>
+            <p>You are granted a limited license to access and use the Website solely for personal purposes. This license does not confer ownership rights in the products and services offered on the site.</p>
+            <p>Unauthorized use of our intellectual property is strictly prohibited. You may not copy, modify, reverse engineer, transmit, disseminate, distribute, market, transfer, disassemble, create derivative works from, or exploit our intellectual property without express written consent.</p>
+        </div>
+
+        <div class="section" id="section12">
+            <h2>12. Copyright Infringement Procedures</h2>
+            <p>We respect third-party intellectual property rights and will take appropriate action against potential infringements. If you believe that content provided through our service violates copyright laws under the Digital Millennium Copyright Act (DMCA), please submit a DMCA copyright notice to our Designated Agent.</p>
+            <h3>Your notice should include:</h3>
+            <ul>
+                <li>A physical/electronic signature from an authorized person.</li>
+                <li>A clear description of the copyrighted work along with a link to where it is displayed on the Service.</li>
+                <li>The contact details of the copyright holder including full name email address telephone number postal address.</li>
+                <li>A statement confirming that you are the copyright holder or an authorized agent acting on behalf of them regarding infringing content.</li>
+                <li>A statement affirming that to your knowledge infringing content has been made available on the Service without consent from copyright holder/agent.</li>
+                <li>A statement declaring that all information provided in your claim is accurate.</li>
+            </ul>
+            <p>Please send your DMCA copyright notice to our Designated Agent at <span class="email">contact@aibrowser.com</span> with "Copyright Infringement Claim" in the subject line. Claims must comply with these requirements as well as with 17 U.S.C. § 512(c)(3) to be considered valid; we reserve the right to reject claims that do not meet these criteria.</p>
+        </div>
+
+        <div class="section" id="section13">
+            <h2>13. Indemnification</h2>
+            <p>You agree that you shall be responsible for your use of our products and services to the fullest extent permitted by law. You also agree to indemnify and hold us harmless against any damages, losses, claims, disputes, demands, fees, costs, or expenses incurred including those arising from litigation if such claims arise out of:</p>
+            <ul>
+                <li>Your use of the service,</li>
+                <li>Your reliance on any information provided through the service,</li>
+                <li>Any torts or breaches related to personal information that you do not own but may have provided,</li>
+                <li>Any other violation of this Agreement.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="section14">
+            <h2>14. Force Majeure Clause</h2>
+            <p>We will not be held liable for failure to provide Services due to circumstances beyond our control including but not limited to natural disasters, acts of God, war, labor strikes, and disturbances.</p>
+        </div>
+
+        <div class="section" id="section15">
+            <h2>15. No Waiver Clause</h2>
+            <p>Neither party's delay nor failure in exercising any right under these Terms shall operate as a waiver thereof; a partial exercise does not preclude further exercise of that right.</p>
+        </div>
+
+        <div class="section" id="section16">
+            <h2>16. Modifications to This Agreement</h2>
+            <p>We reserve the right to amend these terms at our sole discretion by updating this page on the Websites without prior notice; your continued use shall be deemed acceptance of this Agreement as well as updated terms; please keep checking this page regularly for updates.</p>
+        </div>
+
+        <div class="section" id="section17">
+            <h2>17. Assignment Limitations</h2>
+            <p>You understand and agree that you are not permitted to assign any rights or delegate obligations arising through this Agreement without prior written permission from us; we may transfer this Agreement along with obligations arising out of it without your consent in cases such as acquisition, business transfer, merger, corporate reorganization or sale of company assets.</p>
+        </div>
+
+        <div class="section" id="section18">
+            <h2>18. Governing Law Specification</h2>
+            <p>These Terms shall be governed by California law without regard to Conflict of laws principles; all legal proceedings shall be conducted exclusively in San Francisco County courts.</p>
+        </div>
+
+        <div class="section" id="section19">
+            <h2>19. Survival Clause</h2>
+            <p>Any warranties indemnifications representations made by you shall survive beyond the termination of this Agreement/use of the Service.</p>
+        </div>
+
+        <div class="contact-info" id="contact">
+            <h2>Contact Information</h2>
+            <p>For questions regarding these Terms or if you wish to report violations please contact us at:</p><br />
+            <p>
+                <img src="../images/contact.png" width="292px" height="60px" style="vertical-align: middle;">
+            </p>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white py-8 md:py-12">
+        <div class="container">
+                <div class="footTop">
+                    <div class="footIn">
+                        <h3 class="text-lg font-semibold mb-4">Chat Smarter</h3>
+                        <p class="text-gray-400">A smart AI assistant designed to help you learn, write, and chat better—instantly.</p>
+                    </div>
+                    <div class="footIn justC">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                            <ul class="space-y-2">
+                                <li><a href="/legal/terms-of-service" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                                <li><a href="/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                                <li><a href="/legal/do-not-share-my-personal-information" target="_blank" rel="noopener noreferrer" class="hover:text-white">Do Not Share My Personal Information</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footIn justR">
+                        <div>
+                            <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                            <p class="text-gray-400"><a class="mailbox" href="mailto:contact@aibrowser.com">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="rgba(255,255,255,0.8)"><path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM20 7.23792L12.0718 14.338L4 7.21594V19H20V7.23792ZM4.51146 5L12.0619 11.662L19.501 5H4.51146Z"></path></svg> contact@aibrowser.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+    </footer>
+</body>
+</html>
