@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 node_modules/
+apps/*/js/tracking.js
 downloads/
 eggs/
 .eggs/
