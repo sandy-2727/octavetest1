@@ -1,11 +1,22 @@
 /**
  * HTML static includes: replaces paired markers in page HTML with fragment files.
  *
+ * Fragment files (e.g. apps/.../components/header.html) are the source of truth.
+ * The markup between <!-- @include-name --> and <!-- /@include-name --> in each
+ * page is overwritten from the fragment when you run this script. Editing a
+ * fragment alone does not change pages until you run:
+ *   npm run include:html
+ * or npm run include:html:watch (fragments only), or npm run build / build:watch.
+ *
  * In any listed HTML file, add:
- *   <!-- @include-<name> -->
+ *   <!-- @include-<name> optional-attrs -->
  *   <!-- /@include-<name> -->
  * where <name> is a key under "components" in html-includes.config.json
  * (value = path to fragment HTML, relative to repo root).
+ *
+ * Optional attrs on the opening line are merged into the fragment as
+ * {{placeholder}} replacements (see optional "includeDefaults" per component
+ * in the config for values not overridden in the comment).
  *
  * Add new fragments by extending "components" and placing the marker pair in pages.
  * Add pages with glob patterns, e.g. "apps/asksmartai/legal/*.html".
@@ -52,17 +63,42 @@ function expandPageEntry(entry) {
 function pairRegex(key) {
     const k = escapeRegExp(key);
     return new RegExp(
-        `<!--\\s*@include-${k}\\s*-->[\\s\\S]*?<!--\\s*/@include-${k}\\s*-->`
+        `(<!--\\s*@include-${k}(?:\\s+[^>]*?)?\\s*-->)([\\s\\S]*?)(<!--\\s*/@include-${k}\\s*-->)`
     );
 }
 
-function extractInner(full, key) {
+function parseIncludeAttrs(attrString) {
+    const out = {};
+    if (!attrString || !String(attrString).trim()) return out;
+    const re = /([\w-]+)=("[^"]*"|'[^']*'|\S+)/g;
+    let m;
+    while ((m = re.exec(attrString))) {
+        let v = m[2];
+        if (
+            (v.startsWith('"') && v.endsWith('"')) ||
+            (v.startsWith("'") && v.endsWith("'"))
+        ) {
+            v = v.slice(1, -1);
+        }
+        out[m[1]] = v;
+    }
+    return out;
+}
+
+function parseOpeningAttrs(openingComment, key) {
     const k = escapeRegExp(key);
     const innerRe = new RegExp(
-        `^<!--\\s*@include-${k}\\s*-->([\\s\\S]*?)<!--\\s*/@include-${k}\\s*-->$`
+        `^<!--\\s*@include-${k}\\s*(.*?)\\s*-->$`,
+        "s"
     );
-    const m = full.match(innerRe);
-    return m ? m[1].replace(/^\r?\n/, "").replace(/\r?\n$/, "").trimEnd() : null;
+    const m = String(openingComment).trim().match(innerRe);
+    return m ? parseIncludeAttrs(m[1]) : {};
+}
+
+function interpolateFragment(template, vars) {
+    return template.replace(/\{\{\s*([\w-]+)\s*\}\}/g, (_, name) =>
+        vars[name] != null ? String(vars[name]) : ""
+    );
 }
 
 function main() {
@@ -119,25 +155,37 @@ function main() {
         const originalHtml = html;
         const rel = path.relative(ROOT, filePath);
 
+        const includeDefaults = config.includeDefaults || {};
+
         for (const [key, fragment] of Object.entries(fragmentByKey)) {
             const re = pairRegex(key);
             const m = html.match(re);
             if (!m) continue;
 
-            const inner = extractInner(m[0], key);
-            const normalized =
-                inner == null ? null : inner.replace(/\r\n/g, "\n");
-            const fragNorm = fragment.replace(/\r\n/g, "\n");
+            const opening = m[1];
+            const innerRaw = m[2];
+            const closing = m[3];
+            const inner = innerRaw
+                .replace(/^\r?\n/, "")
+                .replace(/\r?\n$/, "")
+                .trimEnd();
+            const normalizedInner = inner.replace(/\r\n/g, "\n");
 
-            const start = `<!-- @include-${key} -->`;
-            const end = `<!-- /@include-${key} -->`;
-            const replacement = `${start}\n${fragment}\n${end}`;
+            const parsedAttrs = parseOpeningAttrs(opening, key);
+            const defaults = includeDefaults[key] || {};
+            const merged = { ...defaults, ...parsedAttrs };
+            const rendered = interpolateFragment(fragment, merged).replace(
+                /\r\n/g,
+                "\n"
+            );
+            const fragNorm = rendered.trimEnd();
 
-            if (normalized === fragNorm) {
+            if (normalizedInner === fragNorm) {
                 console.log("Up to date", rel, key);
                 continue;
             }
 
+            const replacement = `${opening}\n${rendered}\n${closing}`;
             html = html.replace(re, replacement);
             anyChange = true;
             console.log("Updated", rel, key);
@@ -151,7 +199,9 @@ function main() {
     if (!anyChange && pagePaths.length > 0) {
         const hadAnyMarker = pagePaths.some((fp) => {
             const h = fs.readFileSync(fp, "utf8");
-            return Object.keys(components).some((k) => pairRegex(k).test(h));
+            return Object.keys(components).some((k) =>
+                pairRegex(k).test(h)
+            );
         });
         if (!hadAnyMarker) {
             console.warn(

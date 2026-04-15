@@ -1,7 +1,14 @@
 {
+  "includeDefaults": {
+    "button": {
+      "btn-position": "atf",
+      "btn-text": "Download Now"
+    }
+  },
   "components": {
     "header": "apps/asksmartai/components/header.html",
-    "footer": "apps/asksmartai/components/footer.html"
+    "footer": "apps/asksmartai/components/footer.html",
+    "button": "apps/asksmartai/components/button.html"
   },
   "pages": [
     "apps/asksmartai/index.html"

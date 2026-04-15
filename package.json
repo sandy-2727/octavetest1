@@ -3,7 +3,9 @@
     "private": true,
     "scripts": {
         "build": "npm run include:html && webpack --config webpack.config.js",
-        "include:html": "node scripts/html-includes.js"
+        "build:watch": "node scripts/build-watch.js",
+        "include:html": "node scripts/html-includes.js",
+        "include:html:watch": "node scripts/html-includes-watch.js"
     },
     "devDependencies": {
         "webpack": "^5.97.1",
