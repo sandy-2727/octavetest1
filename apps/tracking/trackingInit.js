@@ -1,6 +1,6 @@
 import * as CONSTANTS from "./constants.js";
 import { generateUserID } from "./identity.js";
-import { fireEvent } from "./tracker.js";
+import { fireEvent } from "./trackingInfo.js";
 
 function init() {
     generateUserID();
