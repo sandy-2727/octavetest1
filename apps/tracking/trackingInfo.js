@@ -1,10 +1,10 @@
-import * as CONSTANTS from "./constants.js";
-import { getUserId } from "./identity.js";
+import * as trackingConfig from "./constants.js";
+import { readPersistedUserId } from "./identity.js";
 
-async function getBrowserAndOSInfo() {
-    const ua = navigator.userAgent || "";
-    const uaLower = ua.toLowerCase();
-    const uaData = navigator.userAgentData;
+async function collectClientEnvironment() {
+    const userAgentString = navigator.userAgent || "";
+    const userAgentLower = userAgentString.toLowerCase();
+    const clientHints = navigator.userAgentData;
 
     let browserName = "unknown";
     let browserVersion = "unknown";
@@ -12,26 +12,26 @@ async function getBrowserAndOSInfo() {
     let osVersion = "unknown";
     let device = "Desktop";
 
-    const mapWindowsPlatformVersion = (platformVersion) => {
+    const normalizeWindowsPlatformVersion = (platformVersion) => {
         if (!platformVersion) return "unknown";
-        const major = parseInt(platformVersion.split(".")[0], 10);
+        const ntMajor = parseInt(platformVersion.split(".")[0], 10);
 
-        if (major >= 13) return "11";
-        if (major >= 10) return "10";
-        if (major >= 6) return "7/8/8.1";
+        if (ntMajor >= 13) return "11";
+        if (ntMajor >= 10) return "10";
+        if (ntMajor >= 6) return "7/8/8.1";
         return "unknown";
     };
 
-    if (uaData?.brands?.length) {
-        const brand = uaData.brands.find((b) => !/not|chromium/i.test(b.brand));
-        if (brand) {
-            browserName = brand.brand || "unknown";
-            browserVersion = brand.version || "unknown";
+    if (clientHints?.brands?.length) {
+        const preferredBrand = clientHints.brands.find((b) => !/not|chromium/i.test(b.brand));
+        if (preferredBrand) {
+            browserName = preferredBrand.brand || "unknown";
+            browserVersion = preferredBrand.version || "unknown";
         }
     }
 
     if (browserName === "unknown") {
-        const browserRegexList = [
+        const legacyBrowserPatterns = [
             { name: "Microsoft Edge", regex: /\bedg(?:e|)\/([\d.]+)/i },
             { name: "Opera", regex: /\bopr\/([\d.]+)/i },
             { name: "Chrome", regex: /\bchrome\/([\d.]+)/i },
@@ -39,43 +39,43 @@ async function getBrowserAndOSInfo() {
             { name: "Safari", regex: /\bversion\/([\d.]+).*safari/i },
         ];
 
-        for (const b of browserRegexList) {
-            const match = ua.match(b.regex);
-            if (match) {
-                browserName = b.name;
-                browserVersion = match[1];
+        for (const patternEntry of legacyBrowserPatterns) {
+            const regexMatch = userAgentString.match(patternEntry.regex);
+            if (regexMatch) {
+                browserName = patternEntry.name;
+                browserVersion = regexMatch[1];
                 break;
             }
         }
     }
 
     if (browserName === "unknown") {
-        if (uaLower.includes("safari")) browserName = "Safari";
-        else if (uaLower.includes("chrome")) browserName = "Chrome";
-        else if (uaLower.includes("firefox")) browserName = "Firefox";
+        if (userAgentLower.includes("safari")) browserName = "Safari";
+        else if (userAgentLower.includes("chrome")) browserName = "Chrome";
+        else if (userAgentLower.includes("firefox")) browserName = "Firefox";
     }
 
-    if (uaData?.platform) {
-        osName = uaData.platform;
+    if (clientHints?.platform) {
+        osName = clientHints.platform;
 
-        if (uaData.getHighEntropyValues) {
-            const high = await uaData.getHighEntropyValues(["platformVersion"]);
-            const pv = high.platformVersion;
+        if (clientHints.getHighEntropyValues) {
+            const highEntropyHints = await clientHints.getHighEntropyValues(["platformVersion"]);
+            const platformVersionHint = highEntropyHints.platformVersion;
 
-            if (osName === "Windows" && pv) {
-                osVersion = mapWindowsPlatformVersion(pv);
+            if (osName === "Windows" && platformVersionHint) {
+                osVersion = normalizeWindowsPlatformVersion(platformVersionHint);
             } else {
-                osVersion = pv || "unknown";
+                osVersion = platformVersionHint || "unknown";
             }
         }
     }
 
     if (osName === "unknown") {
-        if (/windows nt/i.test(ua)) {
+        if (/windows nt/i.test(userAgentString)) {
             osName = "Windows";
-            const nt = ua.match(/windows nt ([\d.]+)/i)?.[1] || "";
+            const windowsNtToken = userAgentString.match(/windows nt ([\d.]+)/i)?.[1] || "";
 
-            const winMap = {
+            const windowsNtVersionLabels = {
                 "10.0": "10",
                 "6.3": "8.1",
                 "6.2": "8",
@@ -84,38 +84,38 @@ async function getBrowserAndOSInfo() {
                 "5.1": "XP",
                 "5.2": "XP",
             };
-            osVersion = winMap[nt] || nt || "unknown";
-        } else if (/macintosh|mac os x/i.test(ua)) {
+            osVersion = windowsNtVersionLabels[windowsNtToken] || windowsNtToken || "unknown";
+        } else if (/macintosh|mac os x/i.test(userAgentString)) {
             osName = "macOS";
             osVersion =
-                ua.match(/mac os x ([\d_]+)/i)?.[1]?.replace(/_/g, ".") ||
+                userAgentString.match(/mac os x ([\d_]+)/i)?.[1]?.replace(/_/g, ".") ||
                 "unknown";
-        } else if (/android/i.test(ua)) {
+        } else if (/android/i.test(userAgentString)) {
             osName = "Android";
-            osVersion = ua.match(/android ([\d.]+)/i)?.[1] || "unknown";
-        } else if (/iphone|ipad|ipod/i.test(ua)) {
+            osVersion = userAgentString.match(/android ([\d.]+)/i)?.[1] || "unknown";
+        } else if (/iphone|ipad|ipod/i.test(userAgentString)) {
             osName = "iOS";
             osVersion =
-                ua.match(/os ([\d_]+)/i)?.[1]?.replace(/_/g, ".") || "unknown";
-        } else if (/linux/i.test(ua)) {
+                userAgentString.match(/os ([\d_]+)/i)?.[1]?.replace(/_/g, ".") || "unknown";
+        } else if (/linux/i.test(userAgentString)) {
             osName = "Linux";
             osVersion = "unknown";
         }
     }
 
     if (osName === "unknown") {
-        if (/cros/i.test(ua)) osName = "Chrome OS";
-        else if (/tizen/i.test(ua)) osName = "Tizen";
-        else if (/tv|smart[- ]?tv|hbbtv/i.test(ua)) osName = "Smart TV OS";
+        if (/cros/i.test(userAgentString)) osName = "Chrome OS";
+        else if (/tizen/i.test(userAgentString)) osName = "Tizen";
+        else if (/tv|smart[- ]?tv|hbbtv/i.test(userAgentString)) osName = "Smart TV OS";
     }
 
-    if (uaData?.mobile) {
+    if (clientHints?.mobile) {
         device = "Mobile";
-    } else if (/ipad|tablet/i.test(ua)) {
+    } else if (/ipad|tablet/i.test(userAgentString)) {
         device = "Tablet";
-    } else if (/iphone|ipod|android.*mobile/i.test(ua)) {
+    } else if (/iphone|ipod|android.*mobile/i.test(userAgentString)) {
         device = "Mobile";
-    } else if (/android/i.test(ua)) {
+    } else if (/android/i.test(userAgentString)) {
         device = "Tablet";
     }
 
@@ -125,69 +125,67 @@ async function getBrowserAndOSInfo() {
     }
 
     return {
-        [CONSTANTS.eventDimensions.browser_name]: browserName,
-        [CONSTANTS.eventDimensions.browser_version]: browserVersion,
-        [CONSTANTS.eventDimensions.os_name]: osName,
-        [CONSTANTS.eventDimensions.os_version]: osVersion,
-        [CONSTANTS.eventDimensions.device]: device,
+        [trackingConfig.payloadDimensionKeys.browserName]: browserName,
+        [trackingConfig.payloadDimensionKeys.browserVersion]: browserVersion,
+        [trackingConfig.payloadDimensionKeys.osName]: osName,
+        [trackingConfig.payloadDimensionKeys.osVersion]: osVersion,
+        [trackingConfig.payloadDimensionKeys.device]: device,
     };
 }
 
-function getWindowAndScreenDimensions() {
+function collectViewportMetrics() {
     return {
-        [CONSTANTS.eventDimensions.window_width]: window.innerWidth,
-        [CONSTANTS.eventDimensions.window_height]: window.innerHeight,
-        [CONSTANTS.eventDimensions.screen_width]: window.screen.width,
-        [CONSTANTS.eventDimensions.screen_height]: window.screen.height,
+        [trackingConfig.payloadDimensionKeys.windowWidth]: window.innerWidth,
+        [trackingConfig.payloadDimensionKeys.windowHeight]: window.innerHeight,
+        [trackingConfig.payloadDimensionKeys.screenWidth]: window.screen.width,
+        [trackingConfig.payloadDimensionKeys.screenHeight]: window.screen.height,
     };
 }
 
-function fillAllEventDimensionKeys(payload) {
-    const out = { ...payload };
-    for (const shortKey of Object.values(CONSTANTS.eventDimensions)) {
-        if (!(shortKey in out)) {
-            out[shortKey] = null;
+function padEventDimensionPlaceholders(payload) {
+    const paddedPayload = { ...payload };
+    for (const dimensionKey of Object.values(trackingConfig.payloadDimensionKeys)) {
+        if (!(dimensionKey in paddedPayload)) {
+            paddedPayload[dimensionKey] = null;
         }
     }
-    return out;
+    return paddedPayload;
 }
 
-async function buildLandingEventPayload(name, params) {
-    const userId = getUserId();
-    const browserAndOSInfo = await getBrowserAndOSInfo();
-    const basicEventData = {
-        [CONSTANTS.eventDimensions.user_id]: userId,
-        [CONSTANTS.eventDimensions.event_name]: name,
-        ...browserAndOSInfo,
-        ...getWindowAndScreenDimensions()
+async function composeEventPayload(name, params) {
+    const resolvedUserId = readPersistedUserId();
+    const clientEnvironmentSlice = await collectClientEnvironment();
+    const basePayload = {
+        [trackingConfig.payloadDimensionKeys.userId]: resolvedUserId,
+        [trackingConfig.payloadDimensionKeys.eventName]: name,
+        ...clientEnvironmentSlice,
+        ...collectViewportMetrics()
     };
-    basicEventData[CONSTANTS.eventDimensions.current_url] =
+    basePayload[trackingConfig.payloadDimensionKeys.currentUrl] =
             window.location.href;
 
-    const finalEventData = {};
+    const mergedPayload = {};
     Object.assign(
-        finalEventData,
-        basicEventData,
+        mergedPayload,
+        basePayload,
         params
     );
-    return finalEventData;
+    return mergedPayload;
 }
 
 /**
  * @param {string} name
  * @param {Record<string, unknown>} [params]
  */
-export async function fireEvent(name, params = {}) {
+export async function emitTrackedEvent(name, params = {}) {
     try {
-        const eventData = await buildLandingEventPayload(name, params);
-        const forLog = fillAllEventDimensionKeys(eventData);
-        console.log("Event -", name, forLog);
+        const composedDimensions = await composeEventPayload(name, params);
+        const dimensionsForLog = padEventDimensionPlaceholders(composedDimensions);
+        console.log("Event -", name, dimensionsForLog);
     } catch {
         console.log(
             "Event -",
             "event_send_failed",
-            fillAllEventDimensionKeys(failPayload),
         );
     }
 }
-
