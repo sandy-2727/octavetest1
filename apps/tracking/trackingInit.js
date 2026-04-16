@@ -1,31 +1,31 @@
-import * as CONSTANTS from "./constants.js";
-import { generateUserID } from "./identity.js";
-import { fireEvent } from "./trackingInfo.js";
+import * as trackingConfig from "./constants.js";
+import { ensureUserId } from "./identity.js";
+import { emitTrackedEvent } from "./trackingInfo.js";
 
-function init() {
-    generateUserID();
-    void fireEvent(CONSTANTS.eventNames.lpld);
+function bootstrapTracking() {
+    ensureUserId();
+    void emitTrackedEvent(trackingConfig.trackedEventNames.landerLoaded);
 
     document.addEventListener("click", (event) => {
-        const btn = event.target.closest(
-            "." + CONSTANTS.classNames.buttonClassName,
+        const clickTarget = event.target.closest(
+            "." + trackingConfig.trackingDomClasses.primaryClickTarget,
         );
-        if (!btn) return;
-        const text = btn.getAttribute("btn-text");
-        const position = btn.getAttribute("btn-position");
-        const params = {};
-        if (text != null && text !== "") {
-            params[CONSTANTS.eventDimensions.btn_text] = text;
+        if (!clickTarget) return;
+        const labelFromDom = clickTarget.getAttribute("btn-text");
+        const positionFromDom = clickTarget.getAttribute("btn-position");
+        const extraDimensions = {};
+        if (labelFromDom != null && labelFromDom !== "") {
+            extraDimensions[trackingConfig.payloadDimensionKeys.buttonText] = labelFromDom;
         }
-        if (position != null && position !== "") {
-            params[CONSTANTS.eventDimensions.btn_position] = position;
+        if (positionFromDom != null && positionFromDom !== "") {
+            extraDimensions[trackingConfig.payloadDimensionKeys.buttonPosition] = positionFromDom;
         }
-        void fireEvent(CONSTANTS.eventNames.btnClkd, params);
+        void emitTrackedEvent(trackingConfig.trackedEventNames.buttonClicked, extraDimensions);
     });
 }
 
 if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", bootstrapTracking);
 } else {
-    init();
+    bootstrapTracking();
 }

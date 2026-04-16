@@ -1,60 +1,60 @@
-import * as CONSTANTS from "./constants.js";
+import * as trackingConfig from "./constants.js";
 
-const ls = (function () {
-    const store = Object.create(null);
+const localStorageMemo = (function () {
+    const readThroughCache = Object.create(null);
     return {
-        getItem: function (key) {
-            if (key in store) {
-                return store[key];
+        read: function (key) {
+            if (key in readThroughCache) {
+                return readThroughCache[key];
             }
-            const value = localStorage.getItem(key);
-            if (value !== null) {
-                store[key] = value;
+            const storedValue = localStorage.getItem(key);
+            if (storedValue !== null) {
+                readThroughCache[key] = storedValue;
             }
-            return value;
+            return storedValue;
         },
-        setItem: function (key, value) {
-            const str = String(value);
-            store[key] = str;
-            localStorage.setItem(key, str);
+        write: function (key, value) {
+            const serializedValue = String(value);
+            readThroughCache[key] = serializedValue;
+            localStorage.setItem(key, serializedValue);
         },
     };
 })();
 
-const cs = (function () {
+const cookieJar = (function () {
     return {
-        getItem: function (key) {
-            return document.cookie.split("; ").reduce((acc, cookie) => {
-                const [name, value] = cookie.split("=");
-                return name === key ? decodeURIComponent(value) : acc;
+        read: function (key) {
+            return document.cookie.split("; ").reduce((accumulator, cookiePair) => {
+                const [cookieName, cookieValue] = cookiePair.split("=");
+                return cookieName === key ? decodeURIComponent(cookieValue) : accumulator;
             }, "");
         },
-        setItem: function (key, value, path = "/", expires = 1) {
-            const domain = CONSTANTS.getLanderDomain();
-            document.cookie = `${key}=${encodeURIComponent(value)}; path=${path}; Domain=.${domain}; max-age=${expires * 31536000}`;
+        write: function (key, value, path = "/", expires = 1) {
+            const parentCookieDomain = trackingConfig.resolveAnalyticsCookieDomain();
+            document.cookie = `${key}=${encodeURIComponent(value)}; path=${path}; Domain=.${parentCookieDomain}; max-age=${expires * 31536000}`;
         },
     };
 })();
 
-export function getUserId() {
-    let userId = ls.getItem(CONSTANTS.lskeys.userid);
-    let userIdFromCookie = cs.getItem(CONSTANTS.lskeys.userid);
+export function readPersistedUserId() {
+    let userId = localStorageMemo.read(trackingConfig.persistenceKeys.userId);
+    let userIdFromCookie = cookieJar.read(trackingConfig.persistenceKeys.userId);
     if (userId && !userIdFromCookie) {
-        cs.setItem(CONSTANTS.lskeys.userid, userId);
+        cookieJar.write(trackingConfig.persistenceKeys.userId, userId);
     }
     return userId;
 }
 
-export function setUserId(userid) {
-    ls.setItem(CONSTANTS.lskeys.userid, userid);
-    cs.setItem(CONSTANTS.lskeys.userid, userid);
+export function persistUserId(userid) {
+    localStorageMemo.write(trackingConfig.persistenceKeys.userId, userid);
+    cookieJar.write(trackingConfig.persistenceKeys.userId, userid);
 }
 
-export function generateUserID(uIdParam) {
-    function getPrefix() {
+export function ensureUserId(uIdParam) {
+    function resolvePathDerivedUserIdPrefix() {
         try {
-            const pathname = window.location.pathname;
-            if (pathname.includes("thank-you")) {
+            const currentPath = window.location.pathname;
+            if (currentPath.includes("thank-you")) {
                 return "ty-";
             }
             return "";
@@ -63,28 +63,28 @@ export function generateUserID(uIdParam) {
         }
     }
 
-    function makeid(length) {
+    function createRandomAlphanumericId(length) {
         let result = "";
-        const characters =
+        const randomIdAlphabet =
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        const charactersLength = characters.length;
+        const alphabetLength = randomIdAlphabet.length;
         let counter = 0;
         while (counter < length) {
-            result += characters.charAt(
-                Math.floor(Math.random() * charactersLength),
+            result += randomIdAlphabet.charAt(
+                Math.floor(Math.random() * alphabetLength),
             );
             counter += 1;
         }
-        let prefix = getPrefix();
+        let prefix = resolvePathDerivedUserIdPrefix();
         return prefix + result;
     }
 
-    let userid = getUserId();
+    let userid = readPersistedUserId();
 
     if (!userid) {
         userid =
-            uIdParam || cs.getItem(CONSTANTS.lskeys.userid) || makeid(15);
-        setUserId(userid);
+            uIdParam || cookieJar.read(trackingConfig.persistenceKeys.userId) || createRandomAlphanumericId(15);
+        persistUserId(userid);
     }
 
     return userid;
